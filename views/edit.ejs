@@ -1,0 +1,60 @@
+<!--THIS IS THE EDIT PAGE FOR NEW BLOGS-->
+
+<html>
+
+    <title>Upload</title>
+    
+    <!--LOCAL CSS-->
+    <style>
+            .post_button{
+             display: flex; 
+             justify-content: center; 
+        }
+    </style>
+
+    <!--BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+
+    <!--SEMANTIC CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+    <%include ./partials/mobileView%>
+
+    <body>
+
+            <!--INCLUDING NAVBAR-->
+            <%include ./partials/navbar%>
+        
+            <!--ENTIRE FORM CONTAINER-->
+            <div class="ui main text container segment">
+            
+                <!--FORM-->
+                <form class="ui form" action="/index/<%=blog._id%>?_method=PUT" method="POST">
+                    
+                    <!--TITLE-->
+                    <div class="field">
+                        <label>Title</label>
+                        <input name="blog[title]" placeholder="Name your Blog" value="<%=blog.title%>" required>
+                    </div>
+                    
+                    <!--IMAGE URL-->
+                    <div class="field"> 
+                        <label >Image URL</label>
+                        <input name="blog[url]" placeholder="Blog's image url" value="<%=blog.url%>" required>
+                    </div>
+                    
+                    <!--BODY-->
+                    <div class="field">
+                        <label>Body</label>
+                        <textarea name="blog[body]" placeholder="Write your BLOG here..." required><%=blog.body%></textarea>
+                    </div>
+                    
+                    <!--EDIT BUTTON-->
+                    <a class="post_button"><button class="btn btn-success">UPDATE YOUR BLOG</button></a>
+                
+                </form>            
+            
+            </div>
+    </body>
+    
+</html>

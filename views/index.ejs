@@ -1,0 +1,85 @@
+<!--INDEX PAGE-->
+
+<html> 
+
+    <title>BLOGSITE</title>
+    
+    <!--BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    
+    <!--SEMANTIC CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    
+    <!--LOCAL CSS-->
+    <style>
+
+        .heading{
+         
+            text-align:center;
+        
+        }
+        
+        .block{
+        
+            text-align: center;
+        
+        }
+
+        .post_button{
+        
+             display: flex; 
+             justify-content: center; 
+        
+        }
+        
+    </style>
+
+    <%include ./partials/mobileView%>
+
+    <body>
+
+        <!--NAVBAR-->
+        <%include ./partials/navbar%>
+        
+        <!--HEADING-->
+        <h1 class="heading">Welcome to BLOGSITE</h1>    
+        
+        <!--ROUTE TO POST BLOG PAGE-->
+        <a href="/upload" class="post_button btn"><button class="btn btn-primary">POST YOUR BLOG</button></a>
+
+        <!--CONTAINER TO CONTAIN ALL THE BLOGS IN THE MIDDLE-->
+        <div class="container">
+
+            <!--LOOP THROUGH EACH BLOGS DATA IN THE MONGODB BLOGSITE DATABASE-->
+            <% blogs.forEach(function(blog){%>
+                
+                <!--TO CONTAIN EACH BLOG IN A BOX LIKE CONTAINER SEPARATELY-->
+                
+                <div class="ui main text container segment">
+               
+                    <!--TITLE-->
+                    <h3><%=blog.title%></h3>
+                    
+                    <!--IMAGE-->
+                    <img class="thumbnail" width="250px" src="<%=blog.url%>">
+                    
+                    <!--BODY-->
+                    <h4><%=blog.body.substring(0,300)%>...</h4>
+                
+                    <!--ROUTE TO SHOW PAGE TO VIEW COMPLETE BLOG-->
+                    <a href="/index/<%=blog._id%>">Read More</a>
+                
+                </div>
+                
+            <%});%>
+        
+        </div>
+
+        <script src="jquery.js"></script>
+    
+    </body>
+
+    
+
+</html>
+

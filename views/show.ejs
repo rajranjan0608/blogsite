@@ -1,0 +1,128 @@
+<!--THIS IS THE PREVIEW PAGE FOR EACH BLOG-->
+
+<html>
+
+    <title>SHOW PAGE</title>
+
+    <!--BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    
+    <!--SEMANTIC CDN CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+    <!--LOCAL CSS-->
+    <style>
+    
+        .post_button{
+        
+            display: flex; 
+            justify-content: center; 
+        }    
+
+        .centerize { 
+            text-align: center;
+        }
+
+        .reply{
+            padding-top: 15px;
+        }
+
+    </style>
+
+    <%include ./partials/mobileView%>
+
+    <body>
+        
+        <!--INCLUDING NAVBAR HEADER-->
+        <%include ./partials/navbar%>
+        
+        <!--CONTAINER FOR TITLE, IMAGE AND BODY OF EACH BLOG-->
+        <div class="ui main text container segment">
+   
+            <!--TITLE-->
+            <div class="ui huge header">
+                <%=blog.title%>
+            </div>
+            
+            <!--IMAGE AND BODY-->
+            <div class="ui top attached segment">
+                
+                <div class="item">
+
+                        <!--IMAGE-->
+                        <img class="thumbnail ui centered rounded image" width="250px" src="<%=blog.url%>">
+                    
+                        <!--BODY-->
+                        <h4><%=blog.body%></h4>
+                
+                </div>
+            
+            </div>
+   
+        </div>
+
+        <!--SHOW COMMENTS-->
+        <div class="post_button ui form ui main text container segment" id="comment">
+            
+            <label>Comments</label>
+            
+            <%blog.comments.forEach(function(comment){%>
+                <div class="ui top attached segment">
+                    <%=comment.comment%>
+                   
+                    <div class="reply row">
+                        <div class="col-xs-4"><a href="">Like</a></div>
+                        <div class="col-xs-4">
+                            <form action="/index/<%=blog._id%>/<%=comment._id%>?_method=DELETE" method="POST">
+
+                                <a href="/index/<%=blog._id%>">Remove</a>
+                
+                            </form>
+                        </div>
+                        <div class="col-xs-4"><a href="">Reply</a></div>                        
+                    </div>
+                </div>
+            <%})%>
+
+            
+        
+        </div>
+
+        <!--BUTTONS FOR COMMENT, EDIT AND DELETE A BLOG-->
+
+        <!--COMMENT A BLOG-->
+            <form action="/index/<%=blog._id%>" method="POST" class="post_button ui form ui main text container">
+
+                <textarea class="field" rows="1" name="comments[comment]" placeholder="Write your comment here..."></textarea>
+
+                <a class="post_button btn" href="#comment"><button class="btn btn-info">COMMENT</button></a>
+
+            </form>
+
+        
+
+        <div class="row">
+
+            <!--ROUTE TO EDIT BLOG PAGE-->
+            <div class="col-xs-6">
+
+                <a href="/index/<%=blog._id%>/edit" class="post_button btn"><button class="btn btn-success">EDIT YOUR BLOG</button></a>
+            
+            </div>
+
+            <!--ROUTE TO DELETE A BLOG-->
+            <div class="col-xs-6">
+                
+                <form action="/index/<%=blog._id%>?_method=DELETE" method="POST">
+
+                <a href="/index/<%=blog._id%>/delete" class="post_button btn"><button class="btn btn-danger"><i class="comment alternate outline"></i>DELETE YOUR BLOG</button></a>
+
+                </form>
+                
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
